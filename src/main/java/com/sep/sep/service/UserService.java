@@ -1,5 +1,7 @@
 package com.sep.sep.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +56,23 @@ public class UserService {
 		
 	}
     
+   
+   
+   public Optional<Author> getAuthorByEmail(String email){
+	   
+	   return authorRepository.findOneByEmail(email);
+   }
     
+   
+   public Optional<Editor> getEditorByEmail(String email){
+	   
+	   return editorRepository.findOneByEmail(email);
+   }
+ 
+   public Optional<Recensent> getRecensentByEmail(String email){
+	   
+	   return recensentRepository.findOneByEmail(email);
+ }
     
 	
 }

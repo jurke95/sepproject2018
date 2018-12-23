@@ -20,17 +20,20 @@ public class Author {
 	private String email;
 	private String password;
 	private String username;
+	private boolean active;
 	
 	
 	
-	public Author(){
-		
-	}
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
 	public Author(Long id, String name, String surname, String city, String country, String email, String password,
-			String username) {
+			String username, boolean active) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -40,6 +43,13 @@ public class Author {
 		this.email = email;
 		this.password = password;
 		this.username = username;
+		this.active = active;
+	}
+
+
+
+	public Author(){
+		
 	}
 
 
@@ -138,6 +148,21 @@ public class Author {
 		this.username = username;
 	}
 
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
+
+	
 
 
 	

@@ -11,5 +11,6 @@ import com.sep.sep.model.EditorArea;
 public interface EditorAreaRepository extends JpaRepository<EditorArea,Long> {
 	
 	EditorArea findOneById(Long id);
+	
 
 }
