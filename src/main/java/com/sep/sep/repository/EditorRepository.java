@@ -13,5 +13,6 @@ public interface EditorRepository extends JpaRepository<Editor,Long> {
 	
 	Editor findOneById(Long id);
 	Optional<Editor> findOneByEmail(String email);
-
+    Editor findOneByUsername(String username);
+    
 }

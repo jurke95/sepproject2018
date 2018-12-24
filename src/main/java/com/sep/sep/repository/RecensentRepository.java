@@ -14,5 +14,6 @@ public interface RecensentRepository extends JpaRepository<Recensent,Long> {
 	
 	Recensent findOneById(Long id);
 	Optional<Recensent> findOneByEmail(String email);
+	Recensent findOneByUsername(String username);
 
 }

@@ -4,22 +4,58 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.sep.sep.validation.ValidEmail;
+import com.sep.sep.validation.ValidPassword;
 
 
 public class UserRegistrationDTO {
 	
 	
-	
+	@NotNull
+	@NotEmpty
 	private String username;
+	
+	@NotNull
+	@NotEmpty
+	@ValidEmail
 	private String email;
+	
+	@NotNull
+	@NotEmpty
+	//@ValidPassword
 	private String password;
+	
+	@NotNull
+	@NotEmpty
+	//@ValidPassword
 	private String password2;
+	
+	@NotNull
+	@NotEmpty
 	private String title;
+	
+	@NotNull
+	@NotEmpty
 	private String opt;
+	
+	@NotNull
+	@NotEmpty
 	private String name;
+	
+	@NotNull
+	@NotEmpty
 	private String surname;
+	
+	@NotNull
+	@NotEmpty
 	private String city;
+	
+	@NotNull
+	@NotEmpty
 	private String country;
 	//@JsonValue
 	//private ArrayList<String>chosenareas;

@@ -74,5 +74,20 @@ public class UserService {
 	   return recensentRepository.findOneByEmail(email);
  }
     
+public Recensent getRecensentByUsername(String username){
+	   
+	   return recensentRepository.findOneByUsername(username);
+ }
+   
+
+public Editor getEditorByUsername(String username){
+	   
+	   return editorRepository.findOneByUsername(username);
+}
+
+public Author getAuthorByUsername(String username){
+	   
+	   return authorRepository.findOneByUsername(username);
+}
 	
 }
