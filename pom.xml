@@ -58,6 +58,8 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.4</version>
 		</dependency>
+		
+		
   
 		
 	</dependencies>
@@ -75,9 +77,6 @@
 
 
 
- <listener>
-     <listener-class>org.springframework.security.ui.session.HttpSessionEventPublisher</listener-class>
- </listener>
-
+ 
 
 </project>

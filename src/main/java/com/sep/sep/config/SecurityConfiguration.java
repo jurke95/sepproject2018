@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.sep.sep.security.AuthoritiesConstants;
 import com.sep.sep.security.JWTFilter;
 
 
@@ -68,8 +69,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.and()
 		.authorizeRequests()
 		.antMatchers("/user/registration").permitAll()
+		.antMatchers("/user/login").permitAll()
 		.antMatchers("/sarea/**").permitAll()
-		.antMatchers("/swork/**").permitAll()
+		.antMatchers("/swork/**").hasAnyAuthority(AuthoritiesConstants.USER)
+		.antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.and()
 		.csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));		

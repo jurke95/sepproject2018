@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ import com.sep.sep.model.Editor;
 import com.sep.sep.model.EditorArea;
 import com.sep.sep.model.Recensent;
 import com.sep.sep.model.RecensentArea;
+import com.sep.sep.model.RegUser;
 import com.sep.sep.model.ScienceArea;
 import com.sep.sep.response.MessageResponse;
 import com.sep.sep.security.TokenProvider;
@@ -48,7 +50,7 @@ import com.sep.sep.validation.PasswordMatchesValidator;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins="http://localhost:3000",allowedHeaders="*")
+@CrossOrigin
 public class UserController {
 	
 	
@@ -288,80 +290,57 @@ public class UserController {
 	@PostMapping("/login")
 	public LoginTokenResponse loginUser(@RequestBody UserLoginDTO loginDTO) {
 		
-		Optional<Author> tempA = userService.getAuthorByEmail(loginDTO.getUsername());
-		Optional<Editor> tempE = userService.getEditorByEmail(loginDTO.getUsername());
-		Optional<Recensent> tempR = userService.getRecensentByEmail(loginDTO.getUsername());
-		
-		if(tempA.isPresent()){
+		     String n= new String("null");
+		     Optional<RegUser> regu=userService.getRegUserByEmail(loginDTO.getEmail());
+			
+			if(!passwordEncoder.matches(loginDTO.getPassword(), regu.get().getPassword())) {
+				
+				return new LoginTokenResponse(null,null,null,n);
+			}
 			
 			
-			if(!passwordEncoder.matches(loginDTO.getPassword(), tempA.get().getPassword())) {
+			UserDetails details = userDetailsServiceImpl.loadUserByUsername(loginDTO.getEmail());
+			
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+					loginDTO.getEmail(), loginDTO.getPassword());
+			
+			
+			Authentication authentication = authenticationManager.authenticate(authenticationToken);
+			
+			
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			
+			
+
+			String jwt = tokenProvider.generateToken(details);
+			
+
+			String role = details.getAuthorities().stream().findFirst().get().getAuthority();
+			
+			
+			
+			Optional<Editor> tempE = userService.getEditorByEmail(loginDTO.getEmail());
+			Optional<Author> tempA = userService.getAuthorByEmail(loginDTO.getEmail());
+			Optional<Recensent> tempR = userService.getRecensentByEmail(loginDTO.getEmail());
+			
+			
+			if(tempA.isPresent()){
+				
+				return new LoginTokenResponse(tempA.get(),null,null,jwt);
+			} else if(tempE.isPresent()){
+				
+				return new LoginTokenResponse(null,tempE.get(),null,jwt);
+			}else if(tempR.isPresent()){
+				
+				return new LoginTokenResponse(null,null,tempR.get(),jwt);
+			}else{
+				
 				return null;
 			}
 			
 			
-			UserDetails details = userDetailsServiceImpl.loadUserByUsername(loginDTO.getUsername());
-			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-					loginDTO.getUsername(), loginDTO.getPassword());
-
-			Authentication authentication = authenticationManager.authenticate(authenticationToken);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			String jwt = tokenProvider.generateToken(details);
-
-			String role = details.getAuthorities().stream().findFirst().get().getAuthority();
-
-			return new LoginTokenResponse(tempA.get(),null,null, jwt);
 		}
-		
-		
-		else if(tempE.isPresent()){
-			
-			if(!passwordEncoder.matches(loginDTO.getPassword(), tempE.get().getPassword())) {
-				return null;
-			}
-			
-			
-			UserDetails details = userDetailsServiceImpl.loadUserByUsername(loginDTO.getUsername());
-			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-					loginDTO.getUsername(), loginDTO.getPassword());
-
-			Authentication authentication = authenticationManager.authenticate(authenticationToken);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			String jwt = tokenProvider.generateToken(details);
-
-			String role = details.getAuthorities().stream().findFirst().get().getAuthority();
-
-			return new LoginTokenResponse(null,tempE.get(),null, jwt);
-			
-		}
-		
-         else if(tempR.isPresent()){
-			
-			if(!passwordEncoder.matches(loginDTO.getPassword(), tempR.get().getPassword())) {
-				return null;
-			}
-			
-			
-			UserDetails details = userDetailsServiceImpl.loadUserByUsername(loginDTO.getUsername());
-			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-					loginDTO.getUsername(), loginDTO.getPassword());
-
-			Authentication authentication = authenticationManager.authenticate(authenticationToken);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			String jwt = tokenProvider.generateToken(details);
-
-			String role = details.getAuthorities().stream().findFirst().get().getAuthority();
-
-			return new LoginTokenResponse(null,null,tempR.get(), jwt);
-			
-		}
-		
-          return null;
-
-	}
+	
 	
 	@PostMapping("/logout")
 	public MessageResponse logout(HttpServletRequest request, HttpServletResponse response) {

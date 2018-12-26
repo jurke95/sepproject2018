@@ -35,6 +35,7 @@ public class Editor {
 	
 	
 	private String email;
+	
 	private boolean isRecensent;
 	
 	
@@ -69,6 +70,9 @@ public class Editor {
 
 
 	public Editor(){
+		
+		this.active=false;
+		this.isRecensent=false;
 		
 	}
 

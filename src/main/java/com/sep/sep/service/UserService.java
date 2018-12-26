@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.sep.sep.model.Author;
 import com.sep.sep.model.Editor;
 import com.sep.sep.model.Recensent;
+import com.sep.sep.model.RegUser;
 import com.sep.sep.repository.AuthorRepository;
 import com.sep.sep.repository.EditorRepository;
 import com.sep.sep.repository.RecensentRepository;
+import com.sep.sep.repository.RegUserRepository;
 
 @Service
 public class UserService {
@@ -26,6 +28,8 @@ public class UserService {
 	private RecensentRepository recensentRepository;
 	
 	
+	@Autowired
+	private RegUserRepository regUserRepository;
 	
 	
 	
@@ -41,6 +45,14 @@ public class UserService {
  public   Editor registrateEditor(Editor e){
 		
 	
+	 e.setActive(true);
+	 
+	 RegUser rr=new RegUser();
+	 rr.setUsername(e.getUsername());
+	 rr.setPassword(e.getPassword());
+	 rr.setActive(true);
+	 rr.setEmail(e.getEmail());
+	 RegUser sav=registrateRegUser(rr);
 		
 		return editorRepository.save(e);
 		
@@ -56,6 +68,21 @@ public class UserService {
 		
 	}
     
+   public  RegUser registrateRegUser(RegUser ru){
+		
+		
+		
+		return regUserRepository.save(ru);
+		
+	}
+   
+   public  Optional<RegUser> getRegUserByEmail(String email){
+		
+		
+		
+ 		return regUserRepository.findOneByEmail(email);
+ 		
+ 	}
    
    
    public Optional<Author> getAuthorByEmail(String email){
