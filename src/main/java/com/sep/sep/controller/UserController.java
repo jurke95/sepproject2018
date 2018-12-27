@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -354,6 +355,19 @@ public class UserController {
 		return new MessageResponse("User is logged out");
 	}
 
+	@GetMapping("/getLoggedUser/{jwt}")
+	public RegUser getLoggedUser(@PathVariable String jwt) {
+
+		System.out.println("POGOVIDO");
+		String usern=tokenProvider.getUsernameFromToken(jwt);
+		Optional<RegUser> regu=userService.getRegUserByEmail(usern);
+		
+		
+
+		return regu.get();
+	}
+	
+	
 
 
 }

@@ -70,9 +70,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/user/registration").permitAll()
 		.antMatchers("/user/login").permitAll()
+		.antMatchers("/user/logout").permitAll()
 		.antMatchers("/sarea/**").permitAll()
 		.antMatchers("/swork/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER)
+		.antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.and()
 		.csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));		
