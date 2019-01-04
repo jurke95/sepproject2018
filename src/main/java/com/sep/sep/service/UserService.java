@@ -1,5 +1,6 @@
 package com.sep.sep.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.sep.sep.model.Editor;
 import com.sep.sep.model.Recensent;
 import com.sep.sep.model.RegUser;
 import com.sep.sep.repository.AuthorRepository;
+import com.sep.sep.repository.EditorAreaRepository;
 import com.sep.sep.repository.EditorRepository;
 import com.sep.sep.repository.RecensentRepository;
 import com.sep.sep.repository.RegUserRepository;
@@ -23,6 +25,10 @@ public class UserService {
 	
 	@Autowired
 	private EditorRepository editorRepository;
+	
+	@Autowired
+	private EditorAreaRepository editorAreaRepository;
+	
 	
 	@Autowired
 	private RecensentRepository recensentRepository;
@@ -52,6 +58,12 @@ public class UserService {
 	 rr.setPassword(e.getPassword());
 	 rr.setActive(true);
 	 rr.setEmail(e.getEmail());
+	 rr.setTitle(e.getTitle());
+	 rr.setName(e.getName());
+	 rr.setCity(e.getCity());
+	 rr.setCountry(e.getCountry());
+	 rr.setSurname(e.getSurname());
+	 
 	 RegUser sav=registrateRegUser(rr);
 		
 		return editorRepository.save(e);
@@ -83,6 +95,12 @@ public class UserService {
  		return regUserRepository.findOneByEmail(email);
  		
  	}
+   
+   
+   public List<String>getEditorsAreasNames(String email){
+
+    return editorAreaRepository.findEditorAreaNames(email);
+   }
    
    
    public Optional<Author> getAuthorByEmail(String email){

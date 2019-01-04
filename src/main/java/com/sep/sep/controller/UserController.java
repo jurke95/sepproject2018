@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.sep.sep.controller.dto.UserLoginDTO;
 import com.sep.sep.controller.dto.UserRegistrationDTO;
 import com.sep.sep.controller.response.LoginTokenResponse;
+import com.sep.sep.controller.response.RegUserResponse;
 import com.sep.sep.model.Author;
 import com.sep.sep.model.Editor;
 import com.sep.sep.model.EditorArea;
@@ -356,15 +357,32 @@ public class UserController {
 	}
 
 	@GetMapping("/getLoggedUser/{jwt}")
-	public RegUser getLoggedUser(@PathVariable String jwt) {
+	public RegUserResponse getLoggedUser(@PathVariable String jwt) {
 
 		System.out.println("POGOVIDO");
 		String usern=tokenProvider.getUsernameFromToken(jwt);
 		Optional<RegUser> regu=userService.getRegUserByEmail(usern);
 		
+		RegUserResponse resp=new RegUserResponse();
+		resp.setName(regu.get().getName());
+		resp.setSurname(regu.get().getSurname());
+		resp.setCity(regu.get().getCity());
+		resp.setCountry(regu.get().getCountry());
+		resp.setEmail(regu.get().getEmail());
+		resp.setTitle(regu.get().getTitle());
+		resp.setUsername(regu.get().getUsername());
+		
+		List<String>areaseditor=userService.getEditorsAreasNames(usern);
+		System.out.println(areaseditor);
+	
+		
+		for (int i=0;i<areaseditor.size();i++){
+			resp.getAreas().add(i, areaseditor.get(i));
+		}
+		
 		
 
-		return regu.get();
+		return resp;
 	}
 	
 	
