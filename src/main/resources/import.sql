@@ -14,3 +14,5 @@ INSERT INTO `sepback`.`reg_user` (`id`,`password`,`username`,`email`,`active`,`n
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '6');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '2');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '8');
+INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('1', 'Politika','1264-4556');
+INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('2', 'Sportski magazin','7896-5485');

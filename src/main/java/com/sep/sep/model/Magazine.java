@@ -33,6 +33,11 @@ public class Magazine {
 	private Editor maineditor;
 	
 	
+	public Magazine(){
+		
+	}
+	
+	
 
 	public Magazine(Long id, String name, String issn, String paymentWay, Editor maineditor, Recensent recensent) {
 		super();
