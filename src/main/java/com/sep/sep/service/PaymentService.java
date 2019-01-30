@@ -3,9 +3,12 @@ package com.sep.sep.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.sep.sep.controller.dto.PaymentMembershipFDTOO;
 import com.sep.sep.model.Magazine;
@@ -27,14 +30,17 @@ public class PaymentService {
 	
 	@Autowired
 	private MagazineRepository magazineRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	
 	
-public Long createPaymentObject(Long idm) {
+public String createPaymentObject() {
 		
-		Magazine magazine = magazineRepository.findOneById(idm);
+		//Magazine magazine = magazineRepository.findOneById(idm);
 		
-		
+		/*
 		String useremail = "";
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
@@ -46,17 +52,27 @@ public Long createPaymentObject(Long idm) {
 		Optional<RegUser> loginuser = userRepository.findOneByEmail(useremail);
 		
 		if(loginuser.get()!=null &&magazine !=null) {
+		
+		*/
 			Payment paymentobj = new Payment();
 			
-			paymentobj.setMerchant(magazine);
-			paymentobj.setCustomer(loginuser.get());	
-			paymentobj.setAmount(1);
+			//paymentobj.setMerchant(magazine);
+			//paymentobj.setCustomer(loginuser.get());	
+			paymentobj.setAmount(5);
 			paymentobj.setTitle("Payment of membership fee");
-			Payment po =  paymentRepository.save(paymentobj);
-			return po.getId();
-		}
-
-		return null;
+			paymentobj.setClientId("Adx8jkEh9Spw-52awuJsOxPbgylg_ABQ1ToE4ig3Hk_ezhprEHrri84m7vSTlRmcVWEcYlBx-Br5jQvb");
+			paymentobj.setClientSecret("ECJy1OsgQbB1Sm4MzBo-5A_Fr-bn9jAgrR5EyEM4pak0yIH1quxkV9lHJK9fdykVLLjG346Wsllj0AxC");
+			paymentobj.setSuccessUrl("http://localhost:3006/#");
+			
+			HttpHeaders header = new HttpHeaders();	
+			HttpEntity entity = new HttpEntity(paymentobj, header);
+			
+			String response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, String.class);
+			
+			return response;
+		
+		
+		
 	}
 	
 	

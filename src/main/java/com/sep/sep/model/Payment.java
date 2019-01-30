@@ -25,28 +25,21 @@ public class Payment {
 	
 	
 	
-	
-	public Payment(){
-		
-	}
-	
-	
-	
-
 	private double amount;
 	
 	private String title;
 	
+	private String successUrl;
 	
+	private String clientId;
 	
-	public Payment(Long id, RegUser customer, Magazine merchant, double amount, String title) {
-		super();
-		this.id = id;
-		this.customer = customer;
-		this.merchant = merchant;
-		this.amount = amount;
-		this.title = title;
+	private String clientSecret;
+	
+    public Payment(){
+		
 	}
+	
+	
 
 	public Long getId() {
 		return id;
@@ -88,6 +81,42 @@ public class Payment {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+
+
+
+	public String getSuccessUrl() {
+		return successUrl;
+	}
+
+
+
+	public void setSuccessUrl(String successUrl) {
+		this.successUrl = successUrl;
+	}
+
+
+
+	public String getClientId() {
+		return clientId;
+	}
+
+
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
 	}
 	
 	

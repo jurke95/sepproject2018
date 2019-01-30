@@ -18,13 +18,13 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	@GetMapping("/create/{idm}")
-	public Long createPayment(@PathVariable Long idm) {
+	@GetMapping("/create")
+	public String createPayment() {
 		
-		System.out.println(idm + "Ovo je id magazinaaaaa");
-		Long res = paymentService.createPaymentObject(idm);
 		
-		System.out.println(res+ "Ovo je id od placanja koji je napravljen");
+		String res = paymentService.createPaymentObject();
+		
+	
 		return res;
 		
 	}
