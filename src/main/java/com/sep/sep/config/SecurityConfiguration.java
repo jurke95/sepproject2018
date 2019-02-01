@@ -73,6 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/user/logout").permitAll()
 		.antMatchers("/sarea/**").permitAll()
 		.antMatchers("/swork/**").hasAnyAuthority(AuthoritiesConstants.USER)
+		.antMatchers("/download/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER)
 		.antMatchers(HttpMethod.POST, "/payment/**").hasAnyAuthority(AuthoritiesConstants.USER)

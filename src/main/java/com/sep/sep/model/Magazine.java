@@ -32,6 +32,8 @@ public class Magazine {
 	@JoinColumn(name="maineditor_id")
 	private Editor maineditor;
 	
+	private String imgpath;
+	
 	
 	public Magazine(){
 		
@@ -88,6 +90,22 @@ public class Magazine {
 	public void setMaineditor(Editor maineditor) {
 		this.maineditor = maineditor;
 	}
+
+
+
+	public String getImgpath() {
+		return imgpath;
+	}
+
+
+
+	public void setImgpath(String imgpath) {
+		this.imgpath = imgpath;
+	}
+
+
+
+	
 
 	
 	

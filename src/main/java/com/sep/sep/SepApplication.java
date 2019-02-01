@@ -16,6 +16,7 @@ public class SepApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SepApplication.class, args);
+		
 	}
 	
 	
@@ -23,6 +24,8 @@ public class SepApplication {
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+	
+	
 	
 	
 }

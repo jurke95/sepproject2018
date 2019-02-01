@@ -24,6 +24,8 @@ public class ScientificWork {
  	private ScienceArea area;
 	private String pdf;
 	private String version;
+	@OneToOne
+	private Magazine magazine;
 	
 	public ScientificWork(){
 		

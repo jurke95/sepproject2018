@@ -4,8 +4,8 @@ INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('3', 'Geology');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('4', 'Biology');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('5', 'Zoology');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('6', 'Mathematics');
-INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('7', 'Statistics');
-INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('8', 'Logic');
+INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('7', 'Technology');
+INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('8', 'Economy');
 INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('1', 'Chemical essay','ww','abs','pdf','1.0');
 INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('2', 'Science laws','ww','abs','pdf','1.0');
 INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('3', 'Maths operations','ww','abs','pdf','1.0');
@@ -14,13 +14,8 @@ INSERT INTO `sepback`.`reg_user` (`id`,`password`,`username`,`email`,`active`,`n
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '6');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '2');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '8');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('1', 'All about Space','1264-4556');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('2', 'Laboratory news','3896-5485');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('3', 'Euro Scientist','4564-1545');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('4', 'Sci Tech','7823-2342');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('5', 'Kvant','7213-6546');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('6', 'Popular Mechanics','5214-1546');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('7', 'Nautilus','5798-5932');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('8', 'BBC Knowledge','2332-3333');
-INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`) VALUES ('9', 'Planetary Report','7418-9632');
+INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('1', 'Bankarstvo','1264-4556','bankarstvo.jpg');
+INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('2', 'Tehnika','3896-5485','tehnika.jpg');
+INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('3', 'Zaštita prirode','4564-1545','zastitaprirode.jpg');
+
 
