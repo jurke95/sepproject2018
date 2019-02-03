@@ -60,9 +60,9 @@ public String createPaymentObject() {
 			//paymentobj.setCustomer(loginuser.get());	
 			paymentobj.setAmount(5);
 			paymentobj.setTitle("Payment of membership fee");
-			paymentobj.setClientId("Adx8jkEh9Spw-52awuJsOxPbgylg_ABQ1ToE4ig3Hk_ezhprEHrri84m7vSTlRmcVWEcYlBx-Br5jQvb");
-			paymentobj.setClientSecret("ECJy1OsgQbB1Sm4MzBo-5A_Fr-bn9jAgrR5EyEM4pak0yIH1quxkV9lHJK9fdykVLLjG346Wsllj0AxC");
-			paymentobj.setSuccessUrl("http://localhost:3006/#");
+			paymentobj.setClientId("Abfq6qRnGEz_CGD2-nVh3BuNVYl4OZgMDM8XK2qzeyhlku2dWy5QcgHg_gzQhlulUqqo8Dyhn5JWpEl2");
+			paymentobj.setClientSecret("EKoyrJq2z345XtWQ88lgQiR7gpxtdnldqkuZz_Ud3eNX5BwinXzMkP5Mq07Nj2qk9gne0k6sm5blF2Tm");
+			paymentobj.setSuccessUrl("http://localhost:3006/");
 			
 			HttpHeaders header = new HttpHeaders();	
 			HttpEntity entity = new HttpEntity(paymentobj, header);
