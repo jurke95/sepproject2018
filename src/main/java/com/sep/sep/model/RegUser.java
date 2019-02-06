@@ -3,6 +3,7 @@ package com.sep.sep.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -28,9 +29,16 @@ public class RegUser {
 	private String country;
 	private String title;
 	private boolean active;
+	private String role;
+	
+	@ElementCollection
+    @CollectionTable(name="listOfMagazines")
+    private  List <String> magazines = new ArrayList<String>();
 	
 	
-
+	@ElementCollection
+    @CollectionTable(name="listOfReports")
+    private  List <String> reports = new ArrayList<String>();
 	
 	
 	
@@ -201,7 +209,52 @@ public class RegUser {
 
 
 
+
+	public List<String> getMagazines() {
+		return magazines;
+	}
+
+
+
+
+	public void setMagazines(List<String> magazines) {
+		this.magazines = magazines;
+	}
+
+
+
+
+	public List<String> getReports() {
+		return reports;
+	}
+
+
+
+
+	public void setReports(List<String> reports) {
+		this.reports = reports;
+	}
+
+
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+
 	
+
+
 	
 	
 

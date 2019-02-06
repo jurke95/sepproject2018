@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.sep.sep.model.Magazine;
+import com.sep.sep.model.MagazineEdition;
 import com.sep.sep.service.MagazineService;
 
 @RestController
@@ -36,6 +38,14 @@ public class MagazineController {
 		
 		
 		
+	}
+	
+	@JsonValue
+	@GetMapping("getEditionsForMagazine/{id}")
+	public List<MagazineEdition> getEditions(@PathVariable Long id){
+		
+		List<MagazineEdition>liste = magazineService.findEditions(id);
+		return liste;
 	}
 	
 }

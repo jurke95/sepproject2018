@@ -26,4 +26,13 @@ public class ScientificWorkService {
 		return scientificWorkRepository.findAll();
 	}
 
+	
+	
+	
+	public List <ScientificWork>getWorksByMagazineAndEdition(Long mid,Long eid){
+		
+		return scientificWorkRepository.getWorksByMagazineAndEdition(mid, eid);
+		
+		
+	}
 }

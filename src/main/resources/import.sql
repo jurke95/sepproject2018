@@ -6,16 +6,48 @@ INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('5', 'Zoology');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('6', 'Mathematics');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('7', 'Technology');
 INSERT INTO `sepback`.`science_area` (`id`,`name`) VALUES ('8', 'Economy');
-INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('1', 'Chemical essay','ww','abs','pdf','1.0');
-INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('2', 'Science laws','ww','abs','pdf','1.0');
-INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`coauthors`,`abstractt`,`pdf`,`version`) VALUES ('3', 'Maths operations','ww','abs','pdf','1.0');
 INSERT INTO `sepback`.`editor` (`id`,`name`,`surname`,`city`,`country`,`title`,`password`,`username`,`active`,`is_recensent`,`email`) VALUES ('1', 'Marko','Juric','Novi Sad','Serbia','dipl.ing','$2a$04$L4Odkksvb3Eqd0iC7e/59eshJ86r9KC4WY3hACUzyWbnk.65qqp/S','jurke95',true,false,'markivicius@hotmail.com')
-INSERT INTO `sepback`.`reg_user` (`id`,`password`,`username`,`email`,`active`,`name`,`surname`,`city`,`country`,`title`) VALUES ('1', '$2a$04$L4Odkksvb3Eqd0iC7e/59eshJ86r9KC4WY3hACUzyWbnk.65qqp/S','jurke95','markivicius@hotmail.com',true, 'Marko','Juric','Novi Sad','Serbia','dipl.ing')
+INSERT INTO `sepback`.`reg_user` (`id`,`password`,`username`,`email`,`active`,`name`,`surname`,`city`,`country`,`title`,`role`) VALUES ('1', '$2a$04$L4Odkksvb3Eqd0iC7e/59eshJ86r9KC4WY3hACUzyWbnk.65qqp/S','jurke95','markivicius@hotmail.com',true, 'Marko','Juric','Novi Sad','Serbia','dipl.ing','USER')
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '6');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '2');
 INSERT INTO `sepback`.`editor_area` (`editor_id`,`sarea_id`) VALUES ('1', '8');
 INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('1', 'Bankarstvo','1264-4556','bankarstvo.jpg');
 INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('2', 'Tehnika','3896-5485','tehnika.jpg');
 INSERT INTO `sepback`.`magazine` (`id`,`name`,`issn`,`imgpath`) VALUES ('3', 'Zaštita prirode','4564-1545','zastitaprirode.jpg');
+INSERT INTO `sepback`.`magazine_edition` (`id`,`magazine_id`,`number`,`name`,`pdf`) VALUES ('1', '1','1','Bankarstvo Broj 1','Bankarstvo1.pdf');
+INSERT INTO `sepback`.`magazine_edition` (`id`,`magazine_id`,`number`,`name`,`pdf`) VALUES ('2', '1','2','Bankarstvo Broj 2','Bankarstvo2.pdf');
+INSERT INTO `sepback`.`magazine_edition` (`id`,`magazine_id`,`number`,`name`,`pdf`) VALUES ('3', '1','3','Bankarstvo Broj 3','Bankarstvo3.pdf');
+INSERT INTO `sepback`.`magazine_edition` (`id`,`magazine_id`,`number`,`name`,`pdf`) VALUES ('4', '2','1','Tehnika Broj 1','Tehnika1.pdf');
+INSERT INTO `sepback`.`magazine_edition` (`id`,`magazine_id`,`number`,`name`,`pdf`) VALUES ('5', '3','1','Zastita prirode Broj 1','Zastita1.pdf');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('1','1.Prometna banka A.D. u modernizacijskim procesima u Srbiji u prvoj polovini XX veka','1.Prometna banka A.D. u modernizacijskim procesima u Srbiji u prvoj polovini XX veka.pdf','1','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('2','2.Trenutni priorotet Bazelskog komiteta-podizanje letvice','2.Trenutni priorotet Bazelskog komiteta-podizanje letvice.pdf','1','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('3','3.Kreditni rizik i kreditni derivati','3.Kreditni rizik i kreditni derivati.pdf','1','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('4','4.Nestandardne mere monetarne politike','4.Nestandardne mere monetarne politike.pdf','1','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('5','1.Ekonomika Bokeljske mornarice','1.Ekonomika Bokeljske mornarice.pdf','1','2');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('6','2.Sustina i aktuelnost Mandel-Flemingovog modela','2.Sustina i aktuelnost Mandel-Flemingovog modela.pdf','1','2');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('7','3.Razvojni putevi bankarstva u Velikoj Britaniji i Irskoj','3.Razvojni putevi bankarstva u Velikoj Britaniji i Irskoj.pdf','1','2');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('8','4.Velikan ekonomske misli XX veka','4.Velikan ekonomske misli XX veka.pdf','1','2');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('9','1.Bazel III -Medjunarodni okvir za merenje izlozenosti riziku likvidnosti','1.Bazel III -Medjunarodni okvir za merenje izlozenosti riziku likvidnosti.pdf','1','3');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('10','2.Uticaj trgovinskih i bankarskih kredita na svetski izvoz','2.Uticaj trgovinskih i bankarskih kredita na svetski izvoz.pdf','1','3');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('11','3.Pregled jednofaktorskih modela kamatnih stopa sa fokusom na model Hal i Vajt','3.Pregled jednofaktorskih modela kamatnih stopa sa fokusom na model Hal i Vajt.pdf','1','3');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('12','4.Ekonomija je umetnost zivljenja','4.Ekonomija je umetnost zivljenja.pdf','1','3');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('13','1.Sinteza i opticke karakteristike nanostrukturnih prahovaZnO i ZnOPEO','1.Sinteza i opticke karakteristike nanostrukturnih prahovaZnO i ZnOPEO.pdf','2','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('14','2.Tehnologije proizvodnje vodonika koriscenjem solarne energije','2.Tehnologije proizvodnje vodonika koriscenjem solarne energije.pdf','2','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('15','3.Kontrola temperature uljnih transformatora promenom brzine obrtaja ventilatora','3.Kontrola temperature uljnih transformatora promenom brzine obrtaja ventilatora.pdf','2','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('16','4.Metodologija procenje potrosnje energije u saobracaju koriscenjem transportnog modela grada','4.Metodologija procenje potrosnje energije u saobracaju koriscenjem transportnog modela grada.pdf','2','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('17','1.Floristicke karakteristike Sarplaninskog grebena kobilica','1.Floristicke karakteristike Sarplaninskog grebena kobilica.pdf','3','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('18','2.Preliminaran opis novog roda ISOPHYA iz Srbije','2.Preliminaran opis novog roda ISOPHYA iz Srbije.pdf','3','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('19','3.Foleofilne vrste roda Onthophagus u fauni Srbije','3.Foleofilne vrste roda Onthophagus u fauni Srbije.pdf','3','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('20','4.Prilog poznavanju stenica Vlasine','4.Prilog poznavanju stenica Vlasine.pdf','3','1');
+INSERT INTO `sepback`.`scientific_work` (`id`,`name`,`pdf`,`magazine_id`,`edition_id`) VALUES ('21','5.Nalaz leventskog sivog dugousana ja podrucju poseda manastira Hilandara','5.Nalaz leventskog sivog dugousana ja podrucju poseda manastira Hilandara.pdf','3','1');
+
+
+
+
+
+
+
+
+
 
 

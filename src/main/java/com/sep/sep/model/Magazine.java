@@ -34,6 +34,11 @@ public class Magazine {
 	
 	private String imgpath;
 	
+    private String clientId;
+	
+	private String clientSecret;
+
+	
 	
 	public Magazine(){
 		
@@ -41,15 +46,24 @@ public class Magazine {
 	
 	
 
-	public Magazine(Long id, String name, String issn, String paymentWay, Editor maineditor, Recensent recensent) {
+
+
+	public Magazine(Long id, String name, String issn, String paymentWay, Editor maineditor, String imgpath,
+			String clientId, String clientSecret) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.issn = issn;
 		this.paymentWay = paymentWay;
 		this.maineditor = maineditor;
-		
+		this.imgpath = imgpath;
+		this.clientId = clientId;
+		this.clientSecret = clientSecret;
 	}
+
+
+
+
 
 	public Long getId() {
 		return id;
@@ -101,6 +115,38 @@ public class Magazine {
 
 	public void setImgpath(String imgpath) {
 		this.imgpath = imgpath;
+	}
+
+
+
+
+
+	public String getClientId() {
+		return clientId;
+	}
+
+
+
+
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+
+
+
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+
+
+
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
 	}
 
 

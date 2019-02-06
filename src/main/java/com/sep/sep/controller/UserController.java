@@ -35,6 +35,7 @@ import com.sep.sep.controller.response.RegUserResponse;
 import com.sep.sep.model.Author;
 import com.sep.sep.model.Editor;
 import com.sep.sep.model.EditorArea;
+import com.sep.sep.model.Reader;
 import com.sep.sep.model.Recensent;
 import com.sep.sep.model.RecensentArea;
 import com.sep.sep.model.RegUser;
@@ -199,7 +200,7 @@ public class UserController {
 				
 				return new MessageResponse("Registration fails");
 			}
-		}else if(userDTO.getOpt().equals("R")){
+		}else if(userDTO.getOpt().equals("R")){ 
 			
 			
 			
@@ -268,6 +269,60 @@ public class UserController {
 			}
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		} else if(userDTO.getOpt().equals("RR")){
+			
+			
+			
+			Optional<Reader> checkedRR=userService.getReaderByEmail(userDTO.getEmail());
+			if(checkedRR.isPresent()){
+				
+				return new MessageResponse("There is already user with the same email");
+			}
+			
+			Reader checkedU=userService.getReaderByUsername(userDTO.getUsername());
+			if(checkedU!=null){
+				
+				return new MessageResponse("There is already user with the same username");
+			}
+			
+			PasswordMatchesValidator pass = new PasswordMatchesValidator();
+			if (pass.isValid(userDTO) == false) {
+				return new MessageResponse("You must retype the same password again");
+			}
+			
+			
+			
+			
+			Reader rr=new Reader();
+			rr.setName(userDTO.getName());
+			rr.setSurname(userDTO.getSurname());
+			rr.setCity(userDTO.getCity());
+			rr.setCountry(userDTO.getCountry());
+			rr.setUsername(userDTO.getUsername());
+			rr.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+			rr.setEmail(userDTO.getEmail());
+			Reader saved=userService.registrateReader(rr);
+			
+			
+			if(saved!=null){
+				
+				return new MessageResponse("Registration success");
+			}
+			else{
+				
+				return new MessageResponse("Registration fails");
+			}
 			
 			
 			

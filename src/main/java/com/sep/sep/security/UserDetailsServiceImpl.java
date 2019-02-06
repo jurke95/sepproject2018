@@ -45,7 +45,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
             throw new IllegalArgumentException("User " + user.getEmail() + " was not activated");
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        if(user.getRole().equals("AUTHOR")){
+        grantedAuthorities.add(new SimpleGrantedAuthority("AUTHOR"));
+        } else{
+        	 grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
                 grantedAuthorities);
