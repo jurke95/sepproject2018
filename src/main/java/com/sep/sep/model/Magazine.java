@@ -37,6 +37,8 @@ public class Magazine {
     private String clientId;
 	
 	private String clientSecret;
+	
+	private double membershipfee; //euros
 
 	
 	
@@ -148,6 +150,28 @@ public class Magazine {
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
 	}
+
+
+
+
+
+	public double getMembershipfee() {
+		return membershipfee;
+	}
+
+
+
+
+
+	public void setMembershipfee(double membershipfee) {
+		this.membershipfee = membershipfee;
+	}
+
+
+
+
+
+	
 
 
 

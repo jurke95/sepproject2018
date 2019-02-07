@@ -18,11 +18,11 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	@GetMapping("/create")
-	public String createPayment() {
+	@GetMapping("/create/{id}")
+	public String createPayment(@PathVariable Long id) {
 		
 		
-		String res = paymentService.createPaymentObject();
+		String res = paymentService.createPaymentObject(id);
 		
 	
 		return res;

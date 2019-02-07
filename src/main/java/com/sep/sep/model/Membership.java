@@ -25,6 +25,9 @@ public class Membership {
 	@JoinColumn(name="user_id")
 	private RegUser member;
 	
+	@ManyToOne
+	@JoinColumn(name="magazine_id")
+	private Magazine magazine;
 	
 	public Membership(){
 		
@@ -87,6 +90,16 @@ public class Membership {
 
 	public void setMember(RegUser member) {
 		this.member = member;
+	}
+
+
+	public Magazine getMagazine() {
+		return magazine;
+	}
+
+
+	public void setMagazine(Magazine magazine) {
+		this.magazine = magazine;
 	}
 	
 	

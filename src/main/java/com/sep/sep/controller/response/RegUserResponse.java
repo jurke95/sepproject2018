@@ -15,6 +15,7 @@ public class RegUserResponse {
 	private String title;
 	private String city;
 	private String country;
+	private String role;
 	private List<String>areas;
 	
 	
@@ -166,6 +167,18 @@ public class RegUserResponse {
 
 	public void setAreas(List<String> areas) {
 		this.areas = areas;
+	}
+
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

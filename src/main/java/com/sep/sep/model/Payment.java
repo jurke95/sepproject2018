@@ -27,13 +27,15 @@ public class Payment {
 	
 	private double amount;
 	
-	private String title;
+	private String description;
 	
 	private String successUrl;
 	
 	private String clientId;
 	
 	private String clientSecret;
+	
+	private String magazinename;
 	
     public Payment(){
 		
@@ -67,13 +69,19 @@ public class Payment {
 
 	
 
-	public String getTitle() {
-		return title;
+	
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
+
 
 	public double getAmount() {
 		return amount;
@@ -117,6 +125,18 @@ public class Payment {
 
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
+	}
+
+
+
+	public String getMagazinename() {
+		return magazinename;
+	}
+
+
+
+	public void setMagazinename(String magazinename) {
+		this.magazinename = magazinename;
 	}
 	
 	

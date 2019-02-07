@@ -34,8 +34,8 @@ public class UserRegistrationDTO {
 	//@ValidPassword
 	private String password2;
 	
-	@NotNull
-	@NotEmpty
+	//@NotNull
+	//@NotEmpty
 	private String title;
 	
 	@NotNull

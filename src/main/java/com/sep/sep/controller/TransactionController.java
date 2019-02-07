@@ -46,6 +46,7 @@ public class TransactionController {
         tr.setMerchant(t.getMerchantmail());
         tr.setTypepayment(t.getType());
         tr.setDatetime(t.getDatetime());
+        tr.setMagazinename(t.getMagazinename());
         tr.setVerified("Paid");
         
         

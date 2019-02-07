@@ -426,6 +426,7 @@ public class UserController {
 		resp.setEmail(regu.get().getEmail());
 		resp.setTitle(regu.get().getTitle());
 		resp.setUsername(regu.get().getUsername());
+		resp.setRole(regu.get().getRole());
 		
 		List<String>areaseditor=userService.getEditorsAreasNames(usern);
 		System.out.println(areaseditor);
