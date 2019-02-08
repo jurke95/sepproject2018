@@ -37,6 +37,8 @@ public class Payment {
 	
 	private String magazinename;
 	
+	private String fronturl;
+	
     public Payment(){
 		
 	}
@@ -137,6 +139,18 @@ public class Payment {
 
 	public void setMagazinename(String magazinename) {
 		this.magazinename = magazinename;
+	}
+
+
+
+	public String getFronturl() {
+		return fronturl;
+	}
+
+
+
+	public void setFronturl(String fronturl) {
+		this.fronturl = fronturl;
 	}
 	
 	

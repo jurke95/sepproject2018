@@ -64,6 +64,7 @@ public String createPaymentObject(Long idmag) {
 			paymentobj.setClientSecret(magazine.getClientSecret());
 			paymentobj.setMagazinename(magazine.getName());
 			paymentobj.setSuccessUrl("http://localhost:8083/transaction/create");
+			paymentobj.setFronturl("http://localhost:3006/#/magazines");
 			
 			
 			HttpHeaders header = new HttpHeaders();	

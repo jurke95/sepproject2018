@@ -1,11 +1,18 @@
 package com.sep.sep.model;
 
+import java.util.Date;
+import java.util.Optional;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Membership {
@@ -16,8 +23,19 @@ public class Membership {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String startDate;
-	private String endDate;
+	@Temporal(value = TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
+	private Date startDate;
+	
+	
+	
+	@Temporal(value = TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
+	private Date endDate;
+	
+	
+	
+	
 	private String amount;
 	private String active;
 	
@@ -32,17 +50,6 @@ public class Membership {
 	public Membership(){
 		
 	}
-	
-
-	public Membership(Long id, String startDate, String endDate, String amount, String active, RegUser member) {
-		super();
-		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.amount = amount;
-		this.active = active;
-		this.member = member;
-	}
 
 	public Long getId() {
 		return id;
@@ -52,19 +59,19 @@ public class Membership {
 		this.id = id;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -92,16 +99,15 @@ public class Membership {
 		this.member = member;
 	}
 
-
 	public Magazine getMagazine() {
 		return magazine;
 	}
-
 
 	public void setMagazine(Magazine magazine) {
 		this.magazine = magazine;
 	}
 	
+
 	
 	
 	

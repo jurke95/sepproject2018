@@ -26,7 +26,7 @@ public class Magazine {
 	
 	
 	 
-	private String paymentWay;
+	private boolean openaccess;
 	 
 	@OneToOne
 	@JoinColumn(name="maineditor_id")
@@ -45,25 +45,22 @@ public class Magazine {
 	public Magazine(){
 		
 	}
-	
-	
 
 
 
-	public Magazine(Long id, String name, String issn, String paymentWay, Editor maineditor, String imgpath,
-			String clientId, String clientSecret) {
+	public Magazine(Long id, String name, String issn, boolean openaccess, Editor maineditor, String imgpath,
+			String clientId, String clientSecret, double membershipfee) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.issn = issn;
-		this.paymentWay = paymentWay;
+		this.openaccess = openaccess;
 		this.maineditor = maineditor;
 		this.imgpath = imgpath;
 		this.clientId = clientId;
 		this.clientSecret = clientSecret;
+		this.membershipfee = membershipfee;
 	}
-
-
 
 
 
@@ -71,37 +68,55 @@ public class Magazine {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public String getIssn() {
 		return issn;
 	}
 
+
+
 	public void setIssn(String issn) {
 		this.issn = issn;
 	}
 
-	public String getPaymentWay() {
-		return paymentWay;
+
+
+	public boolean isOpenaccess() {
+		return openaccess;
 	}
 
-	public void setPaymentWay(String paymentWay) {
-		this.paymentWay = paymentWay;
+
+
+	public void setOpenaccess(boolean openaccess) {
+		this.openaccess = openaccess;
 	}
+
+
 
 	public Editor getMaineditor() {
 		return maineditor;
 	}
+
+
 
 	public void setMaineditor(Editor maineditor) {
 		this.maineditor = maineditor;
@@ -121,13 +136,9 @@ public class Magazine {
 
 
 
-
-
 	public String getClientId() {
 		return clientId;
 	}
-
-
 
 
 
@@ -137,13 +148,9 @@ public class Magazine {
 
 
 
-
-
 	public String getClientSecret() {
 		return clientSecret;
 	}
-
-
 
 
 
@@ -153,25 +160,19 @@ public class Magazine {
 
 
 
-
-
 	public double getMembershipfee() {
 		return membershipfee;
 	}
 
 
 
-
-
 	public void setMembershipfee(double membershipfee) {
 		this.membershipfee = membershipfee;
 	}
-
-
-
-
-
 	
+	
+
+
 
 
 

@@ -14,5 +14,6 @@ public interface MagazineRepository extends JpaRepository<Magazine,Long> {
 	
 	Magazine findOneById(Long id);
 	List<Magazine> findAll();
+	Magazine findOneByName(String name);
 
 }

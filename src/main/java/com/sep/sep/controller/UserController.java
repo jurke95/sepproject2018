@@ -1,6 +1,11 @@
 package com.sep.sep.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.sep.sep.controller.dto.MembershipStatusDTO;
 import com.sep.sep.controller.dto.UserLoginDTO;
 import com.sep.sep.controller.dto.UserRegistrationDTO;
 import com.sep.sep.controller.response.LoginTokenResponse;
@@ -35,11 +41,13 @@ import com.sep.sep.controller.response.RegUserResponse;
 import com.sep.sep.model.Author;
 import com.sep.sep.model.Editor;
 import com.sep.sep.model.EditorArea;
+import com.sep.sep.model.Membership;
 import com.sep.sep.model.Reader;
 import com.sep.sep.model.Recensent;
 import com.sep.sep.model.RecensentArea;
 import com.sep.sep.model.RegUser;
 import com.sep.sep.model.ScienceArea;
+import com.sep.sep.repository.MembershipRepository;
 import com.sep.sep.response.MessageResponse;
 import com.sep.sep.security.TokenProvider;
 import com.sep.sep.security.UserDetailsServiceImpl;
@@ -70,6 +78,8 @@ public class UserController {
 	@Autowired
 	private RecensentAreaService recensentAreaService;
 	
+	@Autowired
+	private MembershipRepository mRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -352,7 +362,7 @@ public class UserController {
 			
 			if(!passwordEncoder.matches(loginDTO.getPassword(), regu.get().getPassword())) {
 				
-				return new LoginTokenResponse(null,null,null,n);
+				return new LoginTokenResponse(null,null,null,null,n);
 			}
 			
 			
@@ -379,24 +389,29 @@ public class UserController {
 			Optional<Editor> tempE = userService.getEditorByEmail(loginDTO.getEmail());
 			Optional<Author> tempA = userService.getAuthorByEmail(loginDTO.getEmail());
 			Optional<Recensent> tempR = userService.getRecensentByEmail(loginDTO.getEmail());
+			Optional<Reader> tempRR = userService.getReaderByEmail(loginDTO.getEmail());
 			
 			
 			if(tempA.isPresent()){
 				
-				return new LoginTokenResponse(tempA.get(),null,null,jwt);
+				return new LoginTokenResponse(tempA.get(),null,null,null,jwt);
 			} else if(tempE.isPresent()){
 				
-				return new LoginTokenResponse(null,tempE.get(),null,jwt);
+				return new LoginTokenResponse(null,tempE.get(),null,null,jwt);
 			}else if(tempR.isPresent()){
 				
-				return new LoginTokenResponse(null,null,tempR.get(),jwt);
-			}else{
+				return new LoginTokenResponse(null,null,tempR.get(),null,jwt);
+			}else if(tempRR.isPresent()){
+			
+			  return new LoginTokenResponse(null,null,null,tempRR.get(),jwt);
+			
+			}
 				
 				return null;
 			}
 			
 			
-		}
+		
 	
 	
 	@PostMapping("/logout")
@@ -427,6 +442,7 @@ public class UserController {
 		resp.setTitle(regu.get().getTitle());
 		resp.setUsername(regu.get().getUsername());
 		resp.setRole(regu.get().getRole());
+		resp.setId(regu.get().getId());
 		
 		List<String>areaseditor=userService.getEditorsAreasNames(usern);
 		System.out.println(areaseditor);
@@ -442,6 +458,57 @@ public class UserController {
 	}
 	
 	
+	@GetMapping("/getMemberships/{id}")
+	public List<Membership> getMemberships(@PathVariable Long id) {
 
+		
+
+		return mRepository.getMembershipsByUser(id);
+	}
+	
+	
+	
+	@GetMapping("/checkMembershipStatus/{id}")
+	public MembershipStatusDTO checkStatus(@PathVariable Long id,HttpServletRequest request){
+		
+		System.out.println("Pogodio check");
+		
+		
+	
+		String j=request.getHeader("Authorization-Token");
+		String usern=tokenProvider.getUsernameFromToken(j);
+		Membership mm=mRepository.getMembershipByUserAndMagazine(usern, id);
+		if(mm==null){
+			return new MembershipStatusDTO("expired");
+		}
+		
+		
+		String timeStamp=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+    	DateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+    	System.out.println("stigaoo");
+    	try {
+			Date now=formatter.parse(timeStamp);
+			Date end=mm.getEndDate();
+			if(now.after(end)){
+				mRepository.delete(mm);
+				return new MembershipStatusDTO("expired");
+			}else{
+				return new MembershipStatusDTO("active");
+			}
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+    	return new MembershipStatusDTO("expired");
+		
+	
+		
+	}
+	
+	
 
 }
