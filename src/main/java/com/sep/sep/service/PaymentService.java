@@ -10,13 +10,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.sep.sep.controller.dto.PaymentDTO;
 import com.sep.sep.controller.dto.PaymentMembershipFDTOO;
 import com.sep.sep.model.Magazine;
+import com.sep.sep.model.MagazineEdition;
 import com.sep.sep.model.Payment;
 import com.sep.sep.model.RegUser;
+import com.sep.sep.model.ScientificWork;
+import com.sep.sep.repository.MagazineEditionRepository;
 import com.sep.sep.repository.MagazineRepository;
 import com.sep.sep.repository.PaymentRepository;
 import com.sep.sep.repository.RegUserRepository;
+import com.sep.sep.repository.ScientificWorkRepository;
 
 @Service
 public class PaymentService {
@@ -33,12 +38,17 @@ public class PaymentService {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-
+   
+	@Autowired
+	private MagazineEditionRepository magazineEditionRepository;
+	
+	@Autowired
+	private ScientificWorkRepository swRepository;
 	
 	
-public String createPaymentObject(Long idmag) {
+public String createPaymentObject(PaymentDTO dto) {
 		
-		Magazine magazine = magazineRepository.findOneById(idmag);
+		Magazine magazine = magazineRepository.findOneById(Long.parseLong(dto.getMagazineid()));
 		
 		/*
 		String useremail = "";
@@ -57,9 +67,22 @@ public String createPaymentObject(Long idmag) {
 			Payment paymentobj = new Payment();
 			
 			//paymentobj.setMerchant(magazine);
+			
 			//paymentobj.setCustomer(loginuser.get());	
+			if(dto.getEditionid().equals("0") && dto.getArticleid().equals("0")){
 			paymentobj.setAmount(magazine.getMembershipfee());
 			paymentobj.setDescription("Membership fee for 30 days");
+			}else if(dto.getArticleid().equals("0")){
+				MagazineEdition me=magazineEditionRepository.findOneById(Long.parseLong(dto.getEditionid()));
+				paymentobj.setAmount(me.getPrice());
+				paymentobj.setDescription(me.getName());
+				
+			}else if(dto.getEditionid().equals("0")){
+				double x=1;
+				ScientificWork sw=swRepository.getOne(Long.parseLong(dto.getArticleid()));
+				paymentobj.setAmount(x);
+				paymentobj.setDescription(sw.getName());
+			}
 			paymentobj.setClientId(magazine.getClientId());
 			paymentobj.setClientSecret(magazine.getClientSecret());
 			paymentobj.setMagazinename(magazine.getName());

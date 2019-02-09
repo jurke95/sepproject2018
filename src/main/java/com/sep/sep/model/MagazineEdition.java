@@ -24,6 +24,8 @@ public class MagazineEdition {
 	
 	private String pdf;
 	
+	private double price;
+	
 	
 	
 	public MagazineEdition(){
@@ -110,6 +112,20 @@ public class MagazineEdition {
 
 	public void setPdf(String pdf) {
 		this.pdf = pdf;
+	}
+
+
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	

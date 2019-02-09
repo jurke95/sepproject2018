@@ -37,6 +37,7 @@ import com.sep.sep.controller.dto.MembershipStatusDTO;
 import com.sep.sep.controller.dto.UserLoginDTO;
 import com.sep.sep.controller.dto.UserRegistrationDTO;
 import com.sep.sep.controller.response.LoginTokenResponse;
+import com.sep.sep.controller.response.ObjectPayedResponse;
 import com.sep.sep.controller.response.RegUserResponse;
 import com.sep.sep.model.Author;
 import com.sep.sep.model.Editor;
@@ -47,7 +48,9 @@ import com.sep.sep.model.Recensent;
 import com.sep.sep.model.RecensentArea;
 import com.sep.sep.model.RegUser;
 import com.sep.sep.model.ScienceArea;
+import com.sep.sep.model.Transaction;
 import com.sep.sep.repository.MembershipRepository;
+import com.sep.sep.repository.TransactionRepository;
 import com.sep.sep.response.MessageResponse;
 import com.sep.sep.security.TokenProvider;
 import com.sep.sep.security.UserDetailsServiceImpl;
@@ -74,6 +77,9 @@ public class UserController {
 	
 	@Autowired
 	private EditorAreaService editoreAreaService;
+	
+	@Autowired
+	private TransactionRepository transactionRepository;
 	
 	@Autowired
 	private RecensentAreaService recensentAreaService;
@@ -506,6 +512,23 @@ public class UserController {
     	return new MembershipStatusDTO("expired");
 		
 	
+		
+	}
+	@GetMapping("/checkObjectPayment/{name}")
+	public ObjectPayedResponse checkIfObjectIsPayed(@PathVariable String name,HttpServletRequest request){
+		
+		String j=request.getHeader("Authorization-Token");
+		String usern=tokenProvider.getUsernameFromToken(j);
+		
+		Transaction check=transactionRepository.getPayedObject(name,usern);
+		
+		if(check==null){
+			return new ObjectPayedResponse("no");
+		}else{
+			return new ObjectPayedResponse("yes");
+		}
+		
+		
 		
 	}
 	

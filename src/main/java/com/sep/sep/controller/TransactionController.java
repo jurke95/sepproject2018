@@ -76,8 +76,8 @@ public class TransactionController {
         Transaction saved=tService.saveTransaction(tr);
         System.out.println("Prosao transakciju");
         System.out.println(tr.getDescription());
-        
-        if(tr.getDescription().equals("Membership for 30 days payment")){
+       
+        if(tr.getDescription().equals("Membership fee for 30 days")){
         	
         	
         	Membership mem= new Membership();

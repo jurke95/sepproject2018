@@ -5,10 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sep.sep.controller.dto.PaymentDTO;
 import com.sep.sep.controller.dto.PaymentMembershipFDTOO;
+import com.sep.sep.controller.response.CodeResponse;
 import com.sep.sep.service.PaymentService;
 
 @RestController
@@ -18,14 +22,16 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	@GetMapping("/create/{id}")
-	public String createPayment(@PathVariable Long id) {
+	@PostMapping("/create")
+	public CodeResponse createPayment(@RequestBody PaymentDTO pdto) {
 		
 		
-		String res = paymentService.createPaymentObject(id);
 		
+		String res = paymentService.createPaymentObject(pdto);
 	
-		return res;
+		
+	  
+		 return new CodeResponse(res);
 		
 	}
 	

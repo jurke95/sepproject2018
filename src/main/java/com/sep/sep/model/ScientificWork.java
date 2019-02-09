@@ -34,6 +34,9 @@ public class ScientificWork {
 	@JoinColumn(name="edition_id")
 	private MagazineEdition edition;
 	
+	
+//	private double price;
+	
 	public ScientificWork(){
 		
 	}
@@ -197,6 +200,20 @@ public class ScientificWork {
 	}
 
 
+
+/*
+	public double getPrice() {
+		return price;
+	}
+
+
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+*/
 
 
 	

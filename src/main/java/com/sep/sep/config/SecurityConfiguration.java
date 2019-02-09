@@ -78,6 +78,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.POST, "/payment/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.GET,"/magazine/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
+		.antMatchers(HttpMethod.GET,"/paymentobj/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
+		.antMatchers(HttpMethod.POST,"/paymentobj/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		
 		
 		.and()
