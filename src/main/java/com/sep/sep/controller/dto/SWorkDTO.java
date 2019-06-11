@@ -20,9 +20,12 @@ public class SWorkDTO {
  	private String area;
 	private Long magid;
 	private String pdf;
+	private String taskid;
 	
 	
-	
+	public SWorkDTO(){
+		
+	}
 	
 	public String getName() {
 		return name;
@@ -67,6 +70,14 @@ public class SWorkDTO {
 	}
 	public void setPdf(String pdf) {
 		this.pdf = pdf;
+	}
+
+	public String getTaskid() {
+		return taskid;
+	}
+
+	public void setTaskid(String taskid) {
+		this.taskid = taskid;
 	}
 	
 	

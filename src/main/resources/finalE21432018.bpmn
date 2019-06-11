@@ -4,10 +4,6 @@
     <bpmn:startEvent id="StartEvent_1" name="start">
       <bpmn:outgoing>SequenceFlow_0h93cfy</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Task_1b3hicl" name="Magazine choose">
-      <bpmn:incoming>SequenceFlow_0h93cfy</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_17ozbzg</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_13v6cq5">
       <bpmn:incoming>SequenceFlow_17ozbzg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_16w0r07</bpmn:outgoing>
@@ -38,7 +34,7 @@
       <bpmn:incoming>SequenceFlow_18epjxs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d2xrhp</bpmn:outgoing>
     </bpmn:subProcess>
-    <bpmn:userTask id="Task_119770c" name="Enter scientific work information">
+    <bpmn:userTask id="Task_119770c" name="Enter scientific work information" camunda:assignee="${authoremail}">
       <bpmn:incoming>SequenceFlow_1nlgm8n</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_06zwjc5</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1r4ujsw</bpmn:incoming>
@@ -218,6 +214,10 @@
       <bpmn:incoming>SequenceFlow_1qf2f3i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0301c6w</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="Task_1b3hicl" name="Magazine check" camunda:class="com.sep.sep.camunda.MagazineCheckDelegate">
+      <bpmn:incoming>SequenceFlow_0h93cfy</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_17ozbzg</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
@@ -226,9 +226,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="358" y="939" width="23" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_03qv5ru_di" bpmnElement="Task_1b3hicl">
-        <dc:Bounds x="540" y="882" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_13v6cq5_di" bpmnElement="ExclusiveGateway_13v6cq5" isMarkerVisible="true">
         <dc:Bounds x="681" y="897" width="50" height="50" />
@@ -588,6 +585,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1dib24e_di" bpmnElement="Task_047s0lv">
         <dc:Bounds x="1898" y="294" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1fngvu5_di" bpmnElement="Task_1b3hicl">
+        <dc:Bounds x="540" y="882" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -30,7 +30,7 @@ public class Magazine {
 	 
 	@OneToOne
 	@JoinColumn(name="maineditor_id")
-	private Editor maineditor;
+	private RegUser maineditor;
 	
 	private String imgpath;
 	
@@ -54,7 +54,7 @@ public class Magazine {
 
 
 
-	public Magazine(Long id, String name, String issn, boolean openaccess, Editor maineditor, String imgpath,
+	public Magazine(Long id, String name, String issn, boolean openaccess, RegUser maineditor, String imgpath,
 			String clientId, String clientSecret, double membershipfee) {
 		super();
 		this.id = id;
@@ -118,13 +118,14 @@ public class Magazine {
 
 
 
-	public Editor getMaineditor() {
+
+	public RegUser getMaineditor() {
 		return maineditor;
 	}
 
 
 
-	public void setMaineditor(Editor maineditor) {
+	public void setMaineditor(RegUser maineditor) {
 		this.maineditor = maineditor;
 	}
 

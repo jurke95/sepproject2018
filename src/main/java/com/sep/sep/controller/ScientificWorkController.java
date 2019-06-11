@@ -9,9 +9,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.camunda.bpm.engine.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +57,9 @@ public class ScientificWorkController {
 	
 	@Autowired
 	private ScienceAreaRepository saRepository;
+	
+	@Autowired
+	private TaskService taskService;
 	
 	
 	@JsonValue
@@ -150,6 +156,17 @@ public class ScientificWorkController {
 		ScienceArea sa= saRepository.findScienceArea(swork.getArea());
 		sw.setArea(sa);
 		scientificWorkService.saveScientificWork(sw);
+		
+        Map<String, Object> variables = new HashMap<>();
+		
+		variables.put("title",swork.getName());
+		variables.put("keywords",swork.getKeywords());
+		variables.put("scientificarea",swork.getArea());
+		variables.put("abstract", swork.getAbstractt());
+		variables.put("coauthors", swork.getCoauthors());
+		
+		
+		taskService.complete(swork.getTaskid(),variables);
 		
 		return "success";
 	}
