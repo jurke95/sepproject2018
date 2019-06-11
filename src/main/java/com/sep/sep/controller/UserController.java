@@ -1,5 +1,6 @@
 package com.sep.sep.controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,17 +12,20 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +41,7 @@ import com.sep.sep.controller.dto.MembershipStatusDTO;
 import com.sep.sep.controller.dto.UserLoginDTO;
 import com.sep.sep.controller.dto.UserRegistrationDTO;
 import com.sep.sep.controller.response.LoginTokenResponse;
+import com.sep.sep.controller.response.LogoutResponse;
 import com.sep.sep.controller.response.ObjectPayedResponse;
 import com.sep.sep.controller.response.RegUserResponse;
 import com.sep.sep.model.Author;
@@ -50,6 +55,7 @@ import com.sep.sep.model.RegUser;
 import com.sep.sep.model.ScienceArea;
 import com.sep.sep.model.Transaction;
 import com.sep.sep.repository.MembershipRepository;
+import com.sep.sep.repository.RegUserRepository;
 import com.sep.sep.repository.TransactionRepository;
 import com.sep.sep.response.MessageResponse;
 import com.sep.sep.security.TokenProvider;
@@ -70,6 +76,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RegUserRepository userRepository;
 	
 	@Autowired
 	private ScienceAreaService scienceAreaService;
@@ -364,11 +373,16 @@ public class UserController {
 	public LoginTokenResponse loginUser(@RequestBody UserLoginDTO loginDTO) {
 		
 		     String n= new String("null");
-		     Optional<RegUser> regu=userService.getRegUserByEmail(loginDTO.getEmail());
+		     System.out.println(loginDTO.getEmail());
+		     RegUser regu=userRepository.findByEmail(loginDTO.getEmail());
+		     
+		     if(regu ==null){
+		    	return new LoginTokenResponse(n);
+		     }
 			
-			if(!passwordEncoder.matches(loginDTO.getPassword(), regu.get().getPassword())) {
+			if(!passwordEncoder.matches(loginDTO.getPassword(), regu.getPassword())) {
 				
-				return new LoginTokenResponse(null,null,null,null,n);
+				return new LoginTokenResponse(n);
 			}
 			
 			
@@ -390,28 +404,11 @@ public class UserController {
 
 			String role = details.getAuthorities().stream().findFirst().get().getAuthority();
 			
+		  if(jwt!=null){
+			  return new LoginTokenResponse(jwt);
+		  }
 			
 			
-			Optional<Editor> tempE = userService.getEditorByEmail(loginDTO.getEmail());
-			Optional<Author> tempA = userService.getAuthorByEmail(loginDTO.getEmail());
-			Optional<Recensent> tempR = userService.getRecensentByEmail(loginDTO.getEmail());
-			Optional<Reader> tempRR = userService.getReaderByEmail(loginDTO.getEmail());
-			
-			
-			if(tempA.isPresent()){
-				
-				return new LoginTokenResponse(tempA.get(),null,null,null,jwt);
-			} else if(tempE.isPresent()){
-				
-				return new LoginTokenResponse(null,tempE.get(),null,null,jwt);
-			}else if(tempR.isPresent()){
-				
-				return new LoginTokenResponse(null,null,tempR.get(),null,jwt);
-			}else if(tempRR.isPresent()){
-			
-			  return new LoginTokenResponse(null,null,null,tempRR.get(),jwt);
-			
-			}
 				
 				return null;
 			}
@@ -420,17 +417,24 @@ public class UserController {
 		
 	
 	
-	@PostMapping("/logout")
-	public MessageResponse logout(HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping("/logout")
+	public LogoutResponse logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		SecurityContextHolder.getContext().setAuthentication(null);
+		//SecurityContextHolder.getContext().setAuthentication(null);
 		if (auth != null) {
+			System.out.println("ovo prvo  ispise");
 			new SecurityContextLogoutHandler().logout(request, response, auth);
+			System.out.println("ovo drugo ispise");
+			 HttpSession session=request.getSession(true);  
+			return new LogoutResponse("ok");
+			
 		}
-
-		return new MessageResponse("User is logged out");
+		
+		return new LogoutResponse("fail");
 	}
+	
+	
 
 	@GetMapping("/getLoggedUser/{jwt}")
 	public RegUserResponse getLoggedUser(@PathVariable String jwt) {

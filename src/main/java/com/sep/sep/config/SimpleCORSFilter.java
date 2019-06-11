@@ -10,12 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -25,18 +27,24 @@ public class SimpleCORSFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
+        HttpSession session=request.getSession();
+        
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization-Token");
+        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization-Token,Enctype");
         if(request.getMethod().equals(HttpMethod.OPTIONS.name())){
             response.setStatus(HttpStatus.NO_CONTENT.value());
         }else{
+        	
+        	if(session.getServletContext()!=null){
             chain.doFilter(req, res);
+        	}
+        	
+        
+            
         }
     }
 
-    public void init(FilterConfig filterConfig) {}
-
-    public void destroy() {}
+    
 }

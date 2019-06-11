@@ -39,6 +39,17 @@ public class Payment {
 	
 	private String fronturl;
 	
+	private String bitcointoken;
+	
+    private String merchantid;
+	
+	private String merchantpassword;
+	
+	private String title;
+	
+	
+	private String payermail;
+	
     public Payment(){
 		
 	}
@@ -151,6 +162,70 @@ public class Payment {
 
 	public void setFronturl(String fronturl) {
 		this.fronturl = fronturl;
+	}
+
+
+
+	public String getBitcointoken() {
+		return bitcointoken;
+	}
+
+
+
+	public void setBitcointoken(String bitcointoken) {
+		this.bitcointoken = bitcointoken;
+	}
+
+
+
+	public String getMerchantid() {
+		return merchantid;
+	}
+
+
+
+	public void setMerchantid(String merchantid) {
+		this.merchantid = merchantid;
+	}
+
+
+
+	public String getMerchantpassword() {
+		return merchantpassword;
+	}
+
+
+
+	public void setMerchantpassword(String merchantpassword) {
+		this.merchantpassword = merchantpassword;
+	}
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+
+
+
+
+	public String getPayermail() {
+		return payermail;
+	}
+
+
+
+	public void setPayermail(String payermail) {
+		this.payermail = payermail;
 	}
 	
 	

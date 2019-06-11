@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sep.sep.model.ScienceArea;
 import com.sep.sep.model.ScientificWork;
 import com.sep.sep.repository.ScientificWorkRepository;
 
@@ -35,4 +36,10 @@ public class ScientificWorkService {
 		
 		
 	}
+	
+public ScientificWork saveScientificWork(ScientificWork sw){
+		
+		return scientificWorkRepository.save(sw);
+	}
+	
 }

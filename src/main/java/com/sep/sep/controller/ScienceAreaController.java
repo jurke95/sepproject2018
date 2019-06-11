@@ -15,7 +15,7 @@ import com.sep.sep.service.ScienceAreaService;
 
 @RestController
 @RequestMapping("/sarea")
-@CrossOrigin(origins="http://localhost:3000",allowedHeaders="*")
+@CrossOrigin(origins="http://localhost:3006",allowedHeaders="*")
 public class ScienceAreaController {
 	
 	@Autowired

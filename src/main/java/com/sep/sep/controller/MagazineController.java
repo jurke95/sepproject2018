@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.sep.sep.model.Magazine;
 import com.sep.sep.model.MagazineEdition;
+import com.sep.sep.repository.MagazineRepository;
 import com.sep.sep.service.MagazineService;
 
 @RestController
@@ -22,6 +23,9 @@ public class MagazineController {
 	
 	@Autowired
 	private MagazineService magazineService;
+	
+	@Autowired
+	private MagazineRepository magazineRepository;
 	
 	
 	
@@ -34,6 +38,21 @@ public class MagazineController {
 		
 		
 		return listm;
+		
+		
+		
+		
+	}
+	
+	
+	@JsonValue
+	@GetMapping("/getMagazineById/{id}")
+	public Magazine getMagazineById(@PathVariable Long id){
+		
+		Magazine m=magazineRepository.findOneById(id);
+		
+		
+		return m;
 		
 		
 		

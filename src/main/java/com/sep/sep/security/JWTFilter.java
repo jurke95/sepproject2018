@@ -2,11 +2,13 @@ package com.sep.sep.security;
 
 import java.io.IOException;
 
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,8 +48,19 @@ public class JWTFilter extends UsernamePasswordAuthenticationFilter{
             }
         }
 
+        
+       
+       
+     
+        
+       
         chain.doFilter(request, response);
+     
+        
+      
 	}
+	
+	
 	
 	
 }

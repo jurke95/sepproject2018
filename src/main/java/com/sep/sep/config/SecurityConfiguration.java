@@ -60,6 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 			passwordEncoder());
     }
 
+    
+    
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -69,9 +71,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.and()
 		.authorizeRequests()
 		.antMatchers("/user/registration").permitAll()
+		.antMatchers("/search/**").permitAll()
 		.antMatchers("/user/login").permitAll()
 		.antMatchers("/user/logout").permitAll()
-		.antMatchers(HttpMethod.GET,"/sarea/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
+		.antMatchers(HttpMethod.GET,"/sarea/**").permitAll()
+		//.antMatchers(HttpMethod.GET,"/sarea/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.GET,"/swork/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers("/download/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
@@ -79,7 +83,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.POST, "/payment/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.GET,"/magazine/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
 		.antMatchers(HttpMethod.GET,"/paymentobj/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
-		.antMatchers(HttpMethod.POST,"/paymentobj/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)
+		.antMatchers(HttpMethod.POST,"/paymentobj/**").hasAnyAuthority(AuthoritiesConstants.USER,AuthoritiesConstants.AUTHOR)                                                                
+      
 		
 		
 		.and()

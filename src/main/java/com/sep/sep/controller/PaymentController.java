@@ -1,5 +1,7 @@
 package com.sep.sep.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,11 @@ public class PaymentController {
 	private PaymentService paymentService;
 	
 	@PostMapping("/create")
-	public CodeResponse createPayment(@RequestBody PaymentDTO pdto) {
+	public CodeResponse createPayment(@RequestBody PaymentDTO pdto,HttpServletRequest request) {
 		
+		String jw=request.getHeader("Authorization-Token");
 		
-		
-		String res = paymentService.createPaymentObject(pdto);
+		String res = paymentService.createPaymentObject(pdto,jw);
 	
 		
 	  

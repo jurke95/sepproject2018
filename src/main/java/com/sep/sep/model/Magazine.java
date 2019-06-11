@@ -38,6 +38,12 @@ public class Magazine {
 	
 	private String clientSecret;
 	
+	private String bitcointoken;
+	
+	private String merchant_id;
+	
+	private String merchant_password;
+	
 	private double membershipfee; //euros
 
 	
@@ -168,6 +174,42 @@ public class Magazine {
 
 	public void setMembershipfee(double membershipfee) {
 		this.membershipfee = membershipfee;
+	}
+
+
+
+	public String getBitcointoken() {
+		return bitcointoken;
+	}
+
+
+
+	public void setBitcointoken(String bitcointoken) {
+		this.bitcointoken = bitcointoken;
+	}
+
+
+
+	public String getMerchant_id() {
+		return merchant_id;
+	}
+
+
+
+	public void setMerchant_id(String merchant_id) {
+		this.merchant_id = merchant_id;
+	}
+
+
+
+	public String getMerchant_password() {
+		return merchant_password;
+	}
+
+
+
+	public void setMerchant_password(String merchant_password) {
+		this.merchant_password = merchant_password;
 	}
 	
 	
